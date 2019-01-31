@@ -19,12 +19,14 @@ func main() {
 	}
 	f, err := os.Open(filename)
 	if err != nil {
-		log.Fatalf("Error: %v\n", err)
+		log.Fatalf("Error Opening File: %v\n", err)
 	}
-	links := link.Parse(f)
+	links, err := link.Parse(f)
+	if err != nil {
+		log.Fatalf("Error Parsing File: %v\n", err)
+	}
 	for _, link := range links {
 		fmt.Print(link)
-		fmt.Println("-------------------")
 	}
 }
 
